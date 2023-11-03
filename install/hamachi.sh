@@ -21,9 +21,10 @@ installHamachiDebian() {
         string=$(curl https://$page | grep "amd64.deb")
         extracted=$(echo "$string" | grep -oE 'href="([^"]+)"' | sed -E 's/^href="(.+)">.+$/\1/')
         cleaned=$(echo "$extracted" | sed 's/href="//;s/"$//')
-        wget https://"$domain""$cleaned" -O hamachi.deb
+        wget https://"$domain""$cleaned" -O /tmp/hamachi.deb
         apt update
-        apt install ./hamachi.deb -y
+        apt install /tmp/hamachi.deb -y
+	rm /tmp/hamachi.deb
 }
 
 installHamachiArch() {
