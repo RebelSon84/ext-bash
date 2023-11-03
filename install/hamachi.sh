@@ -23,7 +23,7 @@ installHamachiDebian() {
         cleaned=$(echo "$extracted" | sed 's/href="//;s/"$//')
         wget https://"$domain""$cleaned" -O hamachi.deb
         apt update
-        apt install hamachi.deb -y
+        apt install ./hamachi.deb -y
 }
 
 installHamachiArch() {
