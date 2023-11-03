@@ -18,13 +18,15 @@ installYay() {
 }
 
 installHamachiDebian() {
+        if [[ ! -e /usr/bin/curl ]]; then apt update && apt install curl;fi
         string=$(curl https://$page | grep "amd64.deb")
         extracted=$(echo "$string" | grep -oE 'href="([^"]+)"' | sed -E 's/^href="(.+)">.+$/\1/')
         cleaned=$(echo "$extracted" | sed 's/href="//;s/"$//')
+        echo "$domain""$cleaned"
         wget https://"$domain""$cleaned" -O /tmp/hamachi.deb
         apt update
         apt install /tmp/hamachi.deb -y
-	rm /tmp/hamachi.deb
+        rm /tmp/hamachi.deb
 }
 
 installHamachiArch() {
